@@ -30,7 +30,7 @@ export default function NumberedSection({
   const imageRefs = useRef<HTMLDivElement[]>([]);
 
   useEffect(() => {
-    imageRefs.current.forEach((el, i) => {
+    imageRefs.current.forEach((el) => {
       if (!el) return;
 
       gsap.fromTo(

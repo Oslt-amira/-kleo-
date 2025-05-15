@@ -3,25 +3,19 @@
 import { Hero } from "@/components/landing-page/Hero";
 import { NavBar } from "@/components/landing-page/NavBar";
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { TextPlugin } from "gsap/TextPlugin";
 import { SplitText } from "gsap/SplitText";
-import { Calendar, Sparkles, Share2, Layers } from "lucide-react";
-import MediaRotator from "@/components/landing-page/MediaRouter";
+
 import ManifestoSectionAlt from "@/components/landing-page/ManifestoSectionAlt";
 import NumberedSection from "@/components/landing-page/NumberedSection";
-import FeatureSection from "@/components/landing-page/FeatureSection";
-import IntegrationGrid from "@/components/landing-page/IntegrationGrid";
+
 import { motion } from "framer-motion";
 import Loader from "@/components/landing-page/Loader";
-import ScrollReveal from "@/components/landing-page/RevealText";
 import AnimatedBlock from "@/components/landing-page/AnimatedBlock";
-import Noise from "@/components/landing-page/Noise";
-import DecayCard from "@/components/landing-page/DecayingCard";
+
 import CanvasCursor from "@/components/landing-page/Canvas-cursor";
-import ScrollVelocity from "@/components/landing-page/ScrollVelocity";
 import Marquee from "@/components/landing-page/Marquee";
 import CTA from "@/components/landing-page/CTA";
 import Integrations from "@/components/landing-page/Integrations";
@@ -318,8 +312,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-
 
       <Integrations />
       <CTA />

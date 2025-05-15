@@ -176,22 +176,6 @@ export default function ManifestoSection() {
             </div>
           </div>
 
-          {/* First image */}
-          <div
-            ref={(el) => {
-              imageRefs.current[0] = el;
-            }}
-            className="col-span-12 mb-16 md:col-span-4 md:col-start-9"
-          >
-            <div className="aspect-square overflow-hidden border border-white/20">
-              <img
-                src="/placeholder.svg?height=400&width=400"
-                alt="Creative calendar"
-                className="h-full w-full object-cover"
-              />
-            </div>
-          </div>
-
           {/* Second text block - Right aligned, medium */}
           <div className="col-span-12 mb-16 md:col-span-6 md:col-start-6">
             <div
@@ -203,22 +187,6 @@ export default function ManifestoSection() {
               Time isn't just what passes or what gets done. It's what imprints.
               We believe calendars should reflect life as it feels, not just as
               it's planned.
-            </div>
-          </div>
-
-          {/* Second image */}
-          <div
-            ref={(el) => {
-              imageRefs.current[1] = el;
-            }}
-            className="col-span-12 mb-16 md:col-span-5"
-          >
-            <div className="h-40 overflow-hidden border border-white/20">
-              <img
-                src="/placeholder.svg?height=200&width=500"
-                alt="Life moments"
-                className="h-full w-full object-cover"
-              />
             </div>
           </div>
 
@@ -249,22 +217,6 @@ export default function ManifestoSection() {
               The latte with a friend. The song that put you in a creative
               trance. The fragments of inspiration you've gathered for your next
               project.
-            </div>
-          </div>
-
-          {/* Third image */}
-          <div
-            ref={(el) => {
-              imageRefs.current[2] = el;
-            }}
-            className="col-span-12 mb-16 md:col-span-4 md:col-start-9"
-          >
-            <div className="aspect-video overflow-hidden border border-white/20">
-              <img
-                src="/placeholder.svg?height=300&width=400"
-                alt="Creative inspiration"
-                className="h-full w-full object-cover"
-              />
             </div>
           </div>
 

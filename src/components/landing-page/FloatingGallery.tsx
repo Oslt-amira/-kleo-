@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import Image from "next/image";
 
@@ -73,7 +73,7 @@ export default function DepthFloatingGallery() {
     update();
 
     return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
+  });
 
   return (
     <main className="pointer-events-none absolute top-0 h-screen w-screen overflow-hidden bg-transparent">

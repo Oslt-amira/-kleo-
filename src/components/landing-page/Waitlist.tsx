@@ -6,7 +6,6 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
-import { ShaderGradientCanvas, ShaderGradient } from "@shadergradient/react";
 import Noise from "./Noise";
 
 export default function WaitlistComponent() {

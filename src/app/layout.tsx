@@ -1,14 +1,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { ClerkProvider, GoogleOneTap } from "@clerk/nextjs";
 import { Figtree } from "next/font/google";
-import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { Suspense } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "next-themes";
 import Loader from "@/components/landing-page/Loader";
 import Noise from "@/components/landing-page/Noise";
-import WaitlistComponent from "@/components/landing-page/Waitlist";
 
 const figTree = Figtree({
   weight: ["300", "400", "500", "600", "700", "800", "900"],
@@ -31,7 +28,6 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head />
       <body className={`${figTree.className} antialiased`}>
-        <ClerkProvider dynamic>
           <ThemeProvider
             attribute="class"
             defaultTheme="light"
@@ -56,7 +52,6 @@ export default function RootLayout({
             {/* <WaitlistComponent /> */}
           </ThemeProvider>
           <Toaster />
-        </ClerkProvider>
       </body>
     </html>
   );

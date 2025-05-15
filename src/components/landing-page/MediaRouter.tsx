@@ -30,7 +30,7 @@ export default function MediaRotator() {
     }, 2000);
 
     return () => clearInterval(interval);
-  }, []);
+  });
 
   return (
     <div className="inline-block rounded-lg border border-stone-600/60 px-2 py-1 text-center">

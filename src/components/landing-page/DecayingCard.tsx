@@ -70,7 +70,7 @@ const DecayCard: React.FC<DecayCardProps> = ({
         map(cursor.current.y, 0, winsize.current.height, -120, 120),
         0.1,
       );
-      let targetRz = lerp(
+      const targetRz = lerp(
         imgValues.imgTransforms.rz,
         map(cursor.current.x, 0, winsize.current.width, -10, 10),
         0.1,

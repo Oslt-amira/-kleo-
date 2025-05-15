@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import MediaRotator from "./MediaRouter";
 import { useRouter } from "next/navigation";
 export default function CTA() {
   const { ref, inView } = useInView({

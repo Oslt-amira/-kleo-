@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 interface Media {
   type: string;
@@ -52,10 +53,12 @@ export default function NumberedSection({
                     whileHover={{ scale: 1.05 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <img
+                    <Image
                       src={item.src || "/placeholder.svg"}
                       alt={item.alt}
                       className="h-full w-full object-cover"
+                      width={60}
+                      height={60}
                     />
                   </motion.div>
                 </div>
