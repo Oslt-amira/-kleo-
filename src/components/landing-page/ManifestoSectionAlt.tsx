@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
+import { motion } from "framer-motion";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -39,7 +40,7 @@ export default function ManifestoSectionAlt() {
 
     // Initial state
     gsap.set(video, {
-      scale: 0.6,
+      scale: 0.7,
       filter: "blur(10px)",
       borderRadius: "4rem",
     });
@@ -49,21 +50,23 @@ export default function ManifestoSectionAlt() {
         trigger: section,
         start: "top top",
         end: "bottom top",
-        scrub: 0.3,
+        scrub: 0.6,
       },
     });
 
     // Animate in (to peak)
     videoTimeline.to(video, {
-      scale: 0.85,
+      scale: 1.1,
       filter: "blur(4px)",
-      borderRadius: "8rem",
+      borderRadius: "4rem",
       ease: "power2.out",
+      duration: "1.2",
+      scrub: 0.9,
     });
 
     // Animate back (to original)
     videoTimeline.to(video, {
-      scale: 0.6,
+      scale: 0.7,
       filter: "blur(10px)",
       borderRadius: "4rem",
       ease: "power2.inOut",
@@ -71,14 +74,12 @@ export default function ManifestoSectionAlt() {
 
     const handleMouseMove = (e: MouseEvent) => {
       const { innerWidth, innerHeight } = window;
-      const x = (e.clientX / innerWidth - 0.5) * 20;
-      const y = (e.clientY / innerHeight - 0.5) * 20;
+      const x = (e.clientX / innerWidth - 0.5) * 40;
+      const y = (e.clientY / innerHeight - 0.5) * 40;
 
       gsap.to(video, {
         rotateY: x,
         rotateX: -y,
-        transformPerspective: 1000,
-        transformOrigin: "center",
         force3D: true,
         duration: 0.6,
         ease: "power3.out",
@@ -163,7 +164,7 @@ export default function ManifestoSectionAlt() {
     <section
       ref={sectionRef}
       id="manifesto"
-      className="relative min-h-screen overflow-hidden py-20"
+      className="relative min-h-screen overflow-hidden pb-20"
     >
       <div className="absolute inset-0 -z-10 flex items-center justify-center">
         <video
@@ -184,43 +185,54 @@ export default function ManifestoSectionAlt() {
 
       {/* Animated Grid Lines */}
       <div className="pointer-events-none absolute inset-0 z-0 hidden md:block">
-        <div className="editorial-line absolute left-[7.5%] top-0 h-full w-px bg-stone-300 opacity-20 dark:bg-stone-600" />
+        <div className="editorial-line absolute left-[7.5%] top-0 h-full w-px bg-stone-400 opacity-20 dark:bg-stone-600" />
 
-        <div className="editorial-line absolute left-0 top-[62%] h-px w-full bg-stone-300 opacity-10 dark:bg-stone-600" />
+        <div className="editorial-line absolute left-0 top-[62%] h-px w-full bg-stone-400 opacity-10 dark:bg-stone-600" />
       </div>
 
       {/* Manifesto content */}
       <div className="relative z-10 mx-auto max-w-screen-xl px-6 py-6 sm:px-8 lg:px-20">
         {/* Title */}
         <div className="manifesto-title mb-32">
-          <h2 className="font-serif text-6xl leading-tight text-stone-900 dark:text-stone-100 md:text-7xl">
+          <motion.h2
+            initial={{ y: 80, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            transition={{ duration: 1.2, ease: "easeOut" }}
+            className="font-serif text-6xl leading-tight text-stone-900 dark:text-stone-100 md:text-7xl"
+          >
             Manifesto
-          </h2>
+          </motion.h2>
         </div>
 
         {/* Line 1 */}
-        <div className="mb-48 grid grid-cols-12">
+        <div className="mb-40 grid grid-cols-12">
           <div className="col-span-12 md:col-span-10 md:col-start-2">
-            <div
+            <motion.div
               ref={(el) => {
                 textRefs.current[0] = el;
               }}
+              initial={{ y: 30, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              transition={{ duration: 1.2, ease: "easeOut" }}
               className="font-serif text-3xl leading-snug text-stone-900 dark:text-stone-300 md:text-5xl"
             >
               We're reimagining what calendars were meant to be —
               <br />
               soulful, creative, and visually alive.
-            </div>
+            </motion.div>
           </div>
         </div>
 
         {/* Line 2 (right-aligned) */}
         <div className="mb-48 grid grid-cols-12">
           <div className="col-span-12 md:col-span-8 md:col-start-5">
-            <div
+            <motion.div
               ref={(el) => {
                 textRefs.current[1] = el;
               }}
+              initial={{ y: 30, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              transition={{ duration: 1.2, ease: "easeOut" }}
               className="text-xl leading-relaxed text-stone-900 dark:text-stone-300 md:text-2xl"
             >
               Time isn't just what passes or what gets done. It's what imprints.
@@ -228,13 +240,16 @@ export default function ManifestoSectionAlt() {
               <br />
               Calendars should reflect life as it feels — not just as it’s
               planned.
-            </div>
+            </motion.div>
           </div>
         </div>
 
         {/* Final Statement (centered) */}
-        <div className="-mt-14 mb-8 flex justify-center">
-          <div
+        <div className="-mt-20 mb-4 flex justify-center">
+          <motion.div
+            initial={{ y: 30, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            transition={{ duration: 1.2, ease: "easeOut" }}
             ref={(el) => {
               textRefs.current[4] = el;
             }}
@@ -242,10 +257,10 @@ export default function ManifestoSectionAlt() {
           >
             Because productivity should be personal, rich, and full of color.
             <br />
-            <span className="mt-24 block font-sans text-xs uppercase tracking-[0.3em] text-stone-600 dark:text-stone-400">
+            <span className="mt-28 block font-sans text-xs uppercase tracking-[0.3em] text-stone-600 dark:text-stone-400">
               Planning as expression. Productivity as art.
             </span>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

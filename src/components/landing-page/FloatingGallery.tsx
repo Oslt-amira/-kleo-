@@ -5,25 +5,51 @@ import gsap from "gsap";
 import Image from "next/image";
 
 const imageGroups = [
-  ["/tools/pinterest.png", "/tools/notion.png", "/tools/obsidian.jpg"],
-  ["/tools/notion.png", "/tools/pinterest.png", "/tools/obsidian.jpg"],
-  ["/tools/pinterest.png", "/tools/pinterest.png"],
+  [
+    "/hero/graphic5.jpg",
+
+    "/hero/kleoNote.png",
+    "/hero/collage.png",
+
+    "/hero/kleoRewind.png",
+
+    "/hero/musicSet.jpg",
+  ],
+  [
+    "/hero/ticketwhite.png",
+    "/hero/working.jpg",
+    "/hero/gallery.jpg",
+    "/hero/photoshoot.jpg",
+    "/hero/rest.jpg",
+  ],
+  [
+    "/hero/work.jpg",
+    "/hero/blue.jpg",
+    "/hero/beigeInspo.jpg",
+    "/hero/photos.jpg",
+  ],
 ];
 
 const positions = [
   [
-    { left: "80%", top: "60%" }, //0-0
-    { left: "20%", top: "50%" }, //0.1
-    { left: "55%", top: "15%" }, //0.2
+    { left: "68%", top: "60%" }, // graphic5.png (bottom-right, de-emphasized)
+    { left: "20%", top: "25%" }, // kleoNote.png (upper-left, conversational anchor)
+    { left: "70%", top: "20%" }, // collage.png (top-right)
+    { left: "45%", top: "75%" }, // kleoRewind.png (lower-mid, non-dominant)
+    { left: "5%", top: "70%" }, // musicSet.jpg (bottom-left edge)
   ],
   [
-    { left: "5%", top: "15%" }, //1-0
-    { left: "70%", top: "30%" }, //1-1
-    { left: "55%", top: "75%" }, //1-2
+    { left: "3%", top: "10%" }, // ticketwhite.png (very top-left)
+    { left: "80%", top: "5%" }, // working.jpg (sharp right, above fold)
+    { left: "25%", top: "65%" }, // gallery.jpg (bottom-left quadrant)
+    { left: "58%", top: "40%" }, // photoshoot.jpg (slightly off-center, non-blocking)
+    { left: "90%", top: "45%" }, // rest.jpg (far right anchor)
   ],
   [
-    { left: "25%", top: "80%" }, //2-0
-    { left: "30%", top: "25%" }, //2-1
+    { left: "45%", top: "12%" }, // work.jpg (near top-center, but slightly off)
+    { left: "32%", top: "30%" }, // blue.jpg (mid-left, fills tension)
+    { left: "2%", top: "48%" }, // beigeInspo.jpg (fills right center)
+    { left: "65%", top: "10%" }, // photos.jpg (fills right center)
   ],
 ];
 
@@ -76,7 +102,7 @@ export default function DepthFloatingGallery() {
   });
 
   return (
-    <main className="pointer-events-none absolute top-0 h-screen w-screen overflow-hidden bg-transparent">
+    <main className="pointer-events-none absolute top-0 min-h-screen w-screen overflow-hidden bg-transparent">
       {imageGroups.map((group, planeIndex) => (
         <div
           key={planeIndex}
@@ -95,7 +121,7 @@ export default function DepthFloatingGallery() {
               width={160 - planeIndex * 20}
               height={120 - planeIndex * 10}
               alt={`Depth ${planeIndex}-${imgIndex}`}
-              className="absolute h-auto rounded-xl shadow-2xl transition-transform duration-300"
+              className="absolute h-auto w-auto rounded-md transition-transform duration-300"
               style={{
                 left: positions[planeIndex][imgIndex].left,
                 top: positions[planeIndex][imgIndex].top,

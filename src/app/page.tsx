@@ -19,8 +19,10 @@ import CanvasCursor from "@/components/landing-page/Canvas-cursor";
 import Marquee from "@/components/landing-page/Marquee";
 import CTA from "@/components/landing-page/CTA";
 import Integrations from "@/components/landing-page/Integrations";
+import MemorySearchSection from "@/components/landing-page/MemorySearchSection";
+import FAQ from "@/components/landing-page/FAQ";
+import Footer from "@/components/landing-page/Footer";
 
-// Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger, TextPlugin, SplitText);
 
 export default function Home() {
@@ -246,17 +248,22 @@ export default function Home() {
             <NumberedSection
               index={0}
               title="Multimedia Calendar Entries"
-              description="Every event can hold photos, videos, drawings, audio clips, even scribbled thoughts. Make memories visually enriching."
+              description="Layer each event with fragments — photos, scribbles, audio clips, notes ,videos and even textures. Curate your calendar like a living archive."
               media={[
                 {
                   type: "image",
-                  src: "/placeholder.svg?height=400&width=300",
-                  alt: "Calendar with media",
+                  src: "/hero/kleoVideo.png",
+                  alt: "video",
                 },
                 {
                   type: "image",
-                  src: "/placeholder.svg?height=200&width=300",
+                  src: "/hero/music.png",
                   alt: "Media example",
+                },
+                {
+                  type: "image",
+                  src: "/hero/kleoNote.png",
+                  alt: "note",
                 },
               ]}
             />
@@ -264,16 +271,11 @@ export default function Home() {
             <NumberedSection
               index={1}
               title="Zine-Style Layouts"
-              description="Life isn't linear. Your calendar shouldn't be either. Switch from calendar month & week grid to collage, scrapbook, or timeline views. Indulge in a more a digital diary than a corporate calendar."
+              description="Life isn't linear. Your calendar shouldn't be either. Explore time through scrapbook layouts, fluide timelines , fragmented memories, and layered visuals — where planning and documenting feel like art, not admin."
               media={[
                 {
                   type: "image",
-                  src: "/placeholder.svg?height=300&width=400",
-                  alt: "Zine layout",
-                },
-                {
-                  type: "image",
-                  src: "/placeholder.svg?height=200&width=200",
+                  src: "/hero/kleoCalT.png",
                   alt: "Scrapbook view",
                 },
               ]}
@@ -282,11 +284,11 @@ export default function Home() {
             <NumberedSection
               index={2}
               title="AI Memory Companion"
-              description="Not only will you be able to generate or adjust your calendar automatically using AI, Kleo learns your patterns, gently suggests lifestyle changes, and offers writing prompts to reflect and grow."
+              description="Let the calendar adjust to you not the other way around. Kleo uses intelligent pattern recognition that intuitively learns your habits, suggests mindful shifts in your routine and life structre — turning data into self-knowledge."
               media={[
                 {
                   type: "image",
-                  src: "/placeholder.svg?height=350&width=250",
+                  src: "/hero/kleoMsg.png",
                   alt: "AI companion",
                 },
               ]}
@@ -294,27 +296,35 @@ export default function Home() {
 
             <NumberedSection
               index={3}
-              title="Private & Shareable Timelines"
-              description="Export any day, week, or month as a shareable zine — for travel, journaling, portfolios, or just remembering."
+              title="Kleo Rewind"
+              description="Curate your story, not your stats.A collection of your past year's imprints — your most inspired days, creative bursts, forgotten thoughts and fulfilling achievements.  "
               media={[
                 {
                   type: "image",
-                  src: "/placeholder.svg?height=250&width=400",
-                  alt: "Shareable timeline",
+                  src: "/hero/kleoRewind.png",
+                  alt: "event",
                 },
                 {
                   type: "image",
-                  src: "/placeholder.svg?height=200&width=200",
-                  alt: "Export example",
+                  src: "/hero/kleoEvent.png",
+                  alt: "event",
+                },
+                {
+                  type: "image",
+                  src: "/hero/voiceMemo.png",
+                  alt: "voice",
                 },
               ]}
             />
           </div>
         </div>
       </section>
-
+      <MemorySearchSection />
       <Integrations />
-      <CTA />
+      <div className="relative w-full overflow-x-hidden">
+        <FAQ />
+        <CTA />
+      </div>
     </div>
   );
 }

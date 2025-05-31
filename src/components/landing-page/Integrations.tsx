@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import CrypticText from "./CrypticText";
 gsap.registerPlugin(ScrollTrigger);
 
 const tools = [
@@ -50,7 +51,8 @@ export default function Integrations() {
   return (
     <section
       ref={containerRef}
-      className="relative flex min-h-screen flex-col px-8 py-32 font-serif text-stone-900"
+      id="integrations"
+      className="relative flex min-h-screen flex-col px-8 pb-32 font-serif text-stone-900"
     >
       <motion.h2
         initial={{ y: 80, opacity: 0 }}
@@ -63,9 +65,12 @@ export default function Integrations() {
       </motion.h2>
 
       {/* SVG + Tools */}
-      <div className="absolute top-64 h-full w-full">
+      <div className="absolute top-64 h-full w-full -translate-y-20">
         {/* Background Connections */}
-        <div
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 1.2, ease: "easeOut" }}
           ref={innerRef}
           className="pointer-events-none absolute inset-0 z-0"
         >
@@ -92,11 +97,14 @@ export default function Integrations() {
               }),
             )}
           </svg>
-        </div>
+        </motion.div>
 
         {/* Tool Icons */}
         {tools.map((tool) => (
-          <div
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 1.2, ease: "easeOut" }}
             key={tool.name}
             className="ease-[cubic-bezier(0.23,1,0.32,1)] group absolute z-10 flex h-20 w-20 items-center justify-center bg-white shadow-xl transition-transform duration-500 hover:scale-110"
             style={{ left: tool.x, top: tool.y }}
@@ -110,25 +118,41 @@ export default function Integrations() {
             <span className="pointer-events-none absolute left-[105%] top-[102%] mb-2 w-max rounded-lg bg-stone-800 bg-opacity-5 px-2 py-1 text-xs text-stone-500 opacity-0 backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-100 dark:bg-stone-200 dark:bg-opacity-5 dark:text-stone-600">
               {tool.name}
             </span>
-          </div>
+          </motion.div>
         ))}
 
         {/* Editorial Labels */}
-        <div className="absolute right-[10%] top-16 z-20 text-[0.7rem] italic tracking-wide text-neutral-500">
-          Seamless Connections
-        </div>
-        <div className="absolute left-16 top-[40%] z-20 text-[0.7rem] italic text-neutral-500">
-          Unify your digital life
-        </div>
-        <div
-          className="right-25 absolute top-2/3 z-20 -translate-y-1/2 transform text-[0.7rem] italic tracking-wide text-neutral-500"
+
+        <CrypticText
+          text="  Seamless Connections"
+          className="absolute right-[10%] top-16 z-20 text-[0.7rem] italic tracking-wide text-neutral-500"
+          speed={80}
+          revealDirection="start"
+          sequential
+          useOriginalCharsOnly={false}
+        />
+
+        <CrypticText
+          text="  Unify your digital life"
+          className="absolute left-16 top-[40%] z-20 text-[0.7rem] italic text-neutral-500"
+          speed={80}
+          revealDirection="start"
+          sequential
+          useOriginalCharsOnly={false}
+        />
+
+        <CrypticText
+          text=" Sync structure  with creativity "
+          className="right-25 absolute top-[60%] h-1/3 max-h-52 -translate-y-1/2 transform overflow-hidden text-wrap text-[0.7rem] italic tracking-wide text-neutral-500"
           style={{
-            writingMode: "vertical-rl",
+            writingMode: "vertical-lr",
             textOrientation: "upright",
           }}
-        >
-          with creativity Sync structure
-        </div>
+          speed={80}
+          revealDirection="start"
+          sequential
+          useOriginalCharsOnly={false}
+        />
       </div>
     </section>
   );

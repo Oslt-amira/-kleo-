@@ -7,20 +7,17 @@ export default function MediaRotator() {
   const [currentWord, setCurrentWord] = useState("media");
   const words = ["Productivity", "Media", "Emotion", "Art", "AI"];
   const containerRef = useRef<HTMLSpanElement>(null);
+  const wordIndexRef = useRef(0);
 
   useEffect(() => {
-    let wordIndex = 0;
     const interval = setInterval(() => {
-      // Fade out current word
       gsap.to(containerRef.current, {
         opacity: 0,
         duration: 0.3,
         onComplete: () => {
-          // Change word
-          wordIndex = (wordIndex + 1) % words.length;
-          setCurrentWord(words[wordIndex]);
+          wordIndexRef.current = (wordIndexRef.current + 1) % words.length;
+          setCurrentWord(words[wordIndexRef.current]);
 
-          // Fade in new word
           gsap.to(containerRef.current, {
             opacity: 1,
             duration: 0.3,
@@ -30,13 +27,13 @@ export default function MediaRotator() {
     }, 2000);
 
     return () => clearInterval(interval);
-  });
+  }, []);
 
   return (
-    <div className="inline-block rounded-lg border border-stone-600/60 px-2 py-1 text-center">
+    <section className="mx-2 inline-block rounded-lg border border-stone-600/60 px-2 py-0.5 text-center">
       <span ref={containerRef} className="mx-1 text-stone-600/60">
         {currentWord}
       </span>
-    </div>
+    </section>
   );
 }

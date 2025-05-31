@@ -13,8 +13,8 @@ export function Hero() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, ease: "easeIn" }}
     >
-      <FloatingGallery/>
-      <div className="-mb-4 ml-2 w-[30vw] sm:-mb-8 sm:w-[20vw]">
+      <FloatingGallery />
+      <div className="z-20 ml-4 w-[30vw] sm:-mb-8 sm:w-[20vw]">
         <Image
           src="/kleoTextLogo.svg"
           alt="Main"
@@ -25,7 +25,7 @@ export function Hero() {
           unoptimized
         />
       </div>
-      <div className="mx-auto max-w-xl font-serif text-sm text-stone-800 opacity-80 dark:text-stone-400">
+      <div className="relative -top-8 z-20 mx-auto max-w-xl font-serif text-sm text-stone-800 opacity-80 dark:text-stone-400 sm:-top-10">
         Productivity as a creative archive.
       </div>
     </motion.div>

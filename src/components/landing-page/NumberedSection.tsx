@@ -42,7 +42,7 @@ export default function NumberedSection({
         },
         {
           opacity: 1,
-          scale: 1,
+          scale: index === 1 ? 1.8 : 1,
           x: 0,
           scrollTrigger: {
             trigger: el,
@@ -60,7 +60,7 @@ export default function NumberedSection({
   return (
     <div className="horizontal-section relative flex h-screen w-full items-start">
       <div
-        className={`flex h-screen w-full flex-col justify-between px-2 py-16 pr-20 ${index === 3 ? "" : "border-r border-stone-300/30"}`}
+        className={`flex h-screen w-full flex-col justify-between px-2 py-16 pr-20 ${index === 3 ? "" : "border-r border-stone-400/60 dark:border-stone-300/30"}`}
       >
         <div className={isEven ? "order-2" : ""}>
           <h2 className="font-serif text-4xl">{title}</h2>
@@ -80,10 +80,12 @@ export default function NumberedSection({
               ref={(el) => {
                 imageRefs.current[i] = el!;
               }}
-              className="absolute rounded-lg border-white bg-stone-200/10 blur-sm transition-all"
+              className="absolute rounded-lg transition-all"
               style={{
-                top: `${20 + i * 25}%`,
-                left: isEven ? `${30 + i * 10}%` : `${50 - i * 10}%`,
+                top: `${30 + i * 15 + (i > 1 ? -35 : 12)}%`,
+                left: isEven
+                  ? `${20 + i * 5 + (i === 1 ? 10 : 20)}%`
+                  : `${15 - i * 20 - (i === 1 ? -10 : -20)}%`,
               }}
             >
               <Image
@@ -91,7 +93,7 @@ export default function NumberedSection({
                 alt={item.alt}
                 width={200}
                 height={200}
-                className="scale-90 rounded-lg opacity-0 shadow-lg"
+                className={`rounded-lg ${index === 1 ? "scale-150" : "scale-100"}`}
               />
             </div>
           ))}

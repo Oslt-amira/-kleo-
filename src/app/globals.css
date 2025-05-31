@@ -204,3 +204,9 @@ html {
 .manifesto-conclusion-container {
   will-change: transform, opacity;
 }
+
+video {
+  will-change: transform;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+}

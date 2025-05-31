@@ -99,7 +99,7 @@ const Noise: React.FC<NoiseProps> = ({
   return (
     <canvas
       ref={grainRef}
-      className="pointer-events-none fixed inset-0 dark:opacity-60"
+      className="rouned-2xl pointer-events-none fixed inset-0 overflow-hidden dark:opacity-60"
     />
   );
 };

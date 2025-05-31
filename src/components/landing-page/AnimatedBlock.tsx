@@ -24,7 +24,7 @@ export default function AnimatedBlock() {
           },
         },
       }}
-      className="mx-auto my-16   flex h-auto max-w-3xl flex-col items-center justify-center space-y-4 text-center font-serif"
+      className="mx-auto my-10 flex h-[27vh] max-w-3xl flex-col items-center justify-center space-y-4 text-center font-serif"
     >
       <motion.p
         variants={{
