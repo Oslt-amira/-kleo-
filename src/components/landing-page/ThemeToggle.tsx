@@ -16,6 +16,7 @@ export default function ThemeToggle() {
         whileHover={{ scale: 1.2, rotate: -80 }}
         whileTap={{ scale: 0.9 }}
         transition={{ duration: 0.4, ease: "easeOut" }}
+        aria-label="Toggle color theme"
         onClick={() => setTheme(isDark ? "light" : "dark")}
         className="relative z-10 h-full w-full hover:bg-transparent"
       >

@@ -19,7 +19,6 @@ const tools = [
   { name: "Figma", img: "/tools/figma.png", x: "69%", y: "18%" },
   { name: "Slack", img: "/tools/slack.png", x: "18%", y: "52%" },
   { name: "Spotify", img: "/tools/spotify.png", x: "38%", y: "63%" },
-  { name: "Obsidian", img: "/tools/Obsidian.jpg", x: "58%", y: "48%" },
   { name: "Miro", img: "/tools/miro.png", x: "80%", y: "42%" },
 ];
 
@@ -52,20 +51,20 @@ export default function Integrations() {
     <section
       ref={containerRef}
       id="integrations"
-      className="relative flex min-h-screen flex-col px-8 pb-32 font-serif text-stone-900"
+      className="relative flex min-h-screen flex-col overflow-x-clip px-5 pb-12 max-lg:isolate max-lg:overflow-hidden font-serif text-stone-900 sm:px-8 lg:pb-32"
     >
       <motion.h2
         initial={{ y: 80, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
         transition={{ duration: 1.2, ease: "easeOut" }}
-        className="relative z-20 mb-40 text-[2.75rem] leading-snug tracking-tight text-stone-800 dark:text-stone-200"
+        className="relative z-20 mb-12 text-4xl leading-snug tracking-tight text-stone-800 dark:text-stone-200 sm:text-[2.75rem] lg:mb-40"
       >
         Integrate with
         <br /> your favorite <br /> tools and services
       </motion.h2>
 
       {/* SVG + Tools */}
-      <div className="absolute top-64 h-full w-full -translate-y-20">
+      <div className="relative h-[28rem] w-full lg:absolute lg:top-64 lg:h-full lg:-translate-y-20">
         {/* Background Connections */}
         <motion.div
           initial={{ opacity: 0 }}
@@ -80,7 +79,7 @@ export default function Integrations() {
           >
             {tools.map((tool, i) =>
               tools.map((t2, j) => {
-                if (i < j && Math.random() > 0.5) {
+                if (i < j && (i + j) % 2 === 0) {
                   return (
                     <line
                       key={`${i}-${j}`}
@@ -106,13 +105,14 @@ export default function Integrations() {
             whileInView={{ scale: 1, opacity: 1 }}
             transition={{ duration: 1.2, ease: "easeOut" }}
             key={tool.name}
-            className="ease-[cubic-bezier(0.23,1,0.32,1)] group absolute z-10 flex h-20 w-20 items-center justify-center bg-white shadow-xl transition-transform duration-500 hover:scale-110"
+            className="ease-[cubic-bezier(0.23,1,0.32,1)] group absolute z-10 flex h-[min(12vw,3rem)] w-[min(12vw,3rem)] items-center justify-center bg-white shadow-xl transition-transform duration-500 hover:scale-110 sm:h-16 sm:w-16 lg:h-20 lg:w-20"
             style={{ left: tool.x, top: tool.y }}
           >
             <Image
               src={tool.img}
               alt={tool.name}
               fill
+              sizes="(min-width: 1024px) 80px, (min-width: 640px) 64px, 48px"
               className="object-cover opacity-90"
             />
             <span className="pointer-events-none absolute left-[105%] top-[102%] mb-2 w-max rounded-lg bg-stone-800 bg-opacity-5 px-2 py-1 text-xs text-stone-500 opacity-0 backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-100 dark:bg-stone-200 dark:bg-opacity-5 dark:text-stone-600">

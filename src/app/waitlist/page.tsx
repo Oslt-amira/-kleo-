@@ -17,11 +17,11 @@ export default function Page() {
   }, []);
 
   return (
-    <main className="flex h-screen items-center justify-center">
+    <main className="flex min-h-[100svh] lg:h-screen lg:min-h-0 items-center justify-center">
       <Suspense fallback={<Loader />}>
         <div
           ref={cursorRef}
-          className="pointer-events-none fixed z-50 hidden h-4 w-4 rounded-full border border-white opacity-70 mix-blend-difference sm:block"
+          className="pointer-events-none fixed z-50 hidden h-4 w-4 rounded-full border border-white opacity-70 mix-blend-difference sm:block [@media(pointer:coarse)]:hidden"
           style={{
             left: `${mousePosition.x}px`,
             top: `${mousePosition.y}px`,

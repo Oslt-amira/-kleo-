@@ -19,24 +19,11 @@ const images = [
 export default function MemorySearchSection() {
   const sectionRef = useRef(null);
   const imageRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const imageTargets = useRef<{ x: number; y: number }[]>([]);
   const phrase = " March Graphic designs";
   const [displayedText, setDisplayedText] = useState("");
   const indexRef = useRef(0);
   const typingDirection = useRef<1 | -1>(1);
   const isAnimating = useRef(false);
-
-  // Precompute explosion coordinates
-  useEffect(() => {
-    imageTargets.current = images.map((_, i) => {
-      const angle = (Math.PI * 2 * i) / images.length;
-      const radius = 200 + (i % 2 === 0 ? 100 : 50);
-      return {
-        x: Math.cos(angle) * radius,
-        y: Math.sin(angle) * radius,
-      };
-    });
-  }, []);
 
   // Typing + animation sync
   useEffect(() => {
@@ -88,11 +75,15 @@ export default function MemorySearchSection() {
     return Promise.all(
       imageRefs.current.map((img, i) => {
         if (!img) return;
-        const { x, y } = imageTargets.current[i];
+        const angle = (Math.PI * 2 * i) / images.length;
+        const desktopRadius = i % 2 === 0 ? 300 : 250;
+        const radius = window.innerWidth >= 1024
+          ? desktopRadius
+          : Math.min(window.innerWidth * 0.25, desktopRadius);
         return gsap
           .to(img, {
-            x,
-            y,
+            x: Math.cos(angle) * radius,
+            y: Math.sin(angle) * radius,
             scale: 1,
             opacity: 1,
             duration: 1,
@@ -124,15 +115,15 @@ export default function MemorySearchSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative flex h-screen w-full items-center justify-center overflow-hidden"
+      className="relative flex min-h-[40rem] w-full items-center justify-center overflow-hidden max-lg:isolate lg:h-screen lg:min-h-0"
     >
       {/* Left Text */}
-      <div className="absolute left-8 top-44 z-10 max-w-md -translate-y-1/2">
+      <div className="absolute left-5 right-5 top-12 z-10 max-w-md sm:left-8 lg:right-auto lg:top-44 lg:-translate-y-1/2">
         <motion.h2
           initial={{ y: 80, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
           transition={{ duration: 1.2, ease: "easeOut" }}
-          className="relative font-serif text-[2.75rem] leading-snug tracking-tight text-stone-800 dark:text-stone-200"
+          className="relative font-serif text-4xl leading-snug tracking-tight text-stone-800 dark:text-stone-200 sm:text-[2.75rem]"
         >
           Search your <br />
           memories instantly
@@ -149,9 +140,7 @@ export default function MemorySearchSection() {
       </div>
 
       {/* Right: Typing + Images */}
-      <div className="absolute top-[60%]
-       -z-10 -translate-y-1/2
-       sm:right-64 sm:top-1/2">
+      <div className="absolute left-1/2 top-[65%] -translate-x-1/2 -translate-y-1/2 lg:left-auto lg:right-64 lg:top-1/2 lg:-z-10 lg:translate-x-0">
         {/* Typing */}
         <div className="flex w-56 items-center gap-2 rounded-xl bg-neutral-800/15 px-4 py-3 pr-6 shadow-lg backdrop-blur-md">
           <Search strokeWidth={0.75} className="text-stone-400" />
@@ -184,7 +173,7 @@ export default function MemorySearchSection() {
                 alt={`Memory ${i}`}
                 width={140}
                 height={180}
-                className="rounded-xl"
+                className="rounded-xl max-lg:h-auto max-lg:w-[min(24vw,9rem)]"
               />
             </div>
           ))}

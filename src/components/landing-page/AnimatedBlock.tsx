@@ -24,7 +24,7 @@ export default function AnimatedBlock() {
           },
         },
       }}
-      className="mx-auto my-10 flex h-[27vh] max-w-3xl flex-col items-center justify-center space-y-4 text-center font-serif"
+      className="mx-auto my-10 flex max-w-3xl max-lg:min-h-[27svh] max-lg:px-5 max-lg:py-8 lg:h-[27vh] flex-col items-center justify-center space-y-4 text-center font-serif"
     >
       <motion.p
         variants={{
@@ -43,7 +43,7 @@ export default function AnimatedBlock() {
           visible: { opacity: 1, y: 0, filter: "blur(0px)" },
         }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="flex items-center justify-center gap-1 text-sm font-light text-stone-600/60"
+        className="flex items-center max-lg:flex-wrap justify-center gap-1 text-sm font-light text-stone-600/60"
       >
         blending calendar structure with
         <motion.span

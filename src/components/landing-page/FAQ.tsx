@@ -17,7 +17,7 @@ const faqItems: FAQItem[] = [
       "A digital calendar reinvented as a creative archive. Kleo blends planning with storytelling — combining events, memories, media, AI, and emotion. It’s a diary, scrapbook, planner, and personal assistant all in one.",
   },
   {
-    id: 1,
+    id: 2,
     title: "Who is Kleo for?",
     description:
       "For those who live fully and feel deeply — artists, thinkers, dreamers, and planners who want to capture more than deadlines. Kleo treats time as something to remember, not just manage.",
@@ -79,22 +79,38 @@ export default function FAQ() {
   };
   return (
     <div
-      className="relative flex h-full min-h-screen w-full flex-col px-8 pt-40 sm:flex-row"
+      className="relative flex h-full min-h-screen w-full flex-col px-5 pt-16 sm:px-8 lg:flex-row lg:pt-40"
       id="faq"
     >
       <motion.h2
         initial={{ y: 80, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
         transition={{ duration: 1.2, ease: "easeOut" }}
-        className="relative z-20 mb-8 font-serif text-[2.75rem] leading-snug tracking-tight text-stone-800 dark:text-stone-200 sm:mb-40"
+        className="relative z-20 mb-8 font-serif text-4xl leading-snug tracking-tight text-stone-800 dark:text-stone-200 sm:text-[2.75rem] lg:mb-40"
       >
         Cut Through the Noise—
         <br />
         Get Straight Answers.
       </motion.h2>
 
+      <div className="w-full space-y-3 lg:hidden">
+        {faqItems.map((item) => (
+          <details
+            key={item.id}
+            className="rounded-xl border border-stone-400/40 bg-stone-200/20 p-4 dark:bg-stone-700/20"
+          >
+            <summary className="cursor-pointer py-2 text-base font-medium text-stone-800 dark:text-stone-200">
+              {item.title}
+            </summary>
+            <p className="pt-3 text-sm leading-relaxed text-stone-600 dark:text-stone-300">
+              {item.description}
+            </p>
+          </details>
+        ))}
+      </div>
+
       <motion.div
-        className="my-8 flex h-[90vh] w-full items-start justify-end gap-1 pt-20"
+        className="my-8 hidden h-[90vh] w-full items-start justify-end gap-1 pt-20 lg:flex"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
@@ -158,7 +174,7 @@ export default function FAQ() {
 
       <CrypticText
         text="Because clarity should never be boring."
-        className="right-25 absolute top-[85%] hidden h-1/3 max-h-52 -translate-y-1/2 transform overflow-hidden text-wrap text-[0.7rem] italic tracking-wide text-neutral-500 sm:block"
+        className="right-25 absolute top-[85%] hidden h-1/3 max-h-52 -translate-y-1/2 transform overflow-hidden text-wrap text-[0.7rem] italic tracking-wide text-neutral-500 lg:block"
         style={{
           writingMode: "vertical-lr",
           textOrientation: "upright",

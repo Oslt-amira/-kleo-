@@ -93,16 +93,19 @@ export default function DepthFloatingGallery() {
         }
       });
 
-      requestAnimationFrame(update);
+      frame = requestAnimationFrame(update);
     };
 
-    update();
+    let frame = requestAnimationFrame(update);
 
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  });
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, []);
 
   return (
-    <main className="pointer-events-none absolute top-0 min-h-screen w-screen overflow-hidden bg-transparent">
+    <div aria-hidden="true" className="floating-gallery pointer-events-none absolute top-0 min-h-screen w-screen overflow-hidden max-lg:inset-0 max-lg:min-h-0 max-lg:w-full bg-transparent">
       {imageGroups.map((group, planeIndex) => (
         <div
           key={planeIndex}
@@ -130,6 +133,6 @@ export default function DepthFloatingGallery() {
           ))}
         </div>
       ))}
-    </main>
+    </div>
   );
 }

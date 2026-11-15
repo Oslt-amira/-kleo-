@@ -42,7 +42,7 @@ export default function WaitlistComponent() {
   };
 
   return (
-    <div className="flex h-screen items-center justify-center px-20 py-20">
+    <div className="flex min-h-[100svh] w-full items-center justify-center px-5 py-12 sm:px-12 sm:py-20 lg:h-screen lg:min-h-0 lg:w-auto lg:px-20">
       <Noise
         patternSize={250}
         patternScaleX={1}

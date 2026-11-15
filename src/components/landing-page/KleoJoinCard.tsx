@@ -4,9 +4,9 @@ import Image from "next/image";
 
 export default function KleoJoinCard() {
   return (
-    <div className="relative h-[56vh] w-[50vh] overflow-hidden rounded-2xl border border-stone-600/80 bg-stone-900/50 shadow-xl">
+    <div className="relative min-h-[28rem] w-full max-w-sm max-lg:flex lg:h-[56vh] lg:min-h-0 lg:w-[50vh] lg:max-w-none overflow-hidden rounded-2xl border border-stone-600/80 bg-stone-900/50 shadow-xl">
 
-      <div className="flex h-full flex-col justify-between p-4">
+      <div className="flex h-full flex-col justify-between p-4 max-lg:h-auto max-lg:min-w-0 max-lg:flex-1 max-lg:gap-8">
         <div>
           <div className="absolute left-1 top-1 mb-8 items-start">
             <Image
@@ -17,7 +17,7 @@ export default function KleoJoinCard() {
             />
           </div>
 
-          <div className="relative top-24 px-2">
+          <div className="relative px-2 pt-24 lg:top-24 lg:pt-0">
             <h1 className="font-serif text-2xl leading-tight text-stone-200">
               Thank you for joining
               <br />

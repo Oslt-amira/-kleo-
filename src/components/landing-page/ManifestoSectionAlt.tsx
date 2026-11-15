@@ -16,161 +16,167 @@ export default function ManifestoSectionAlt() {
   useEffect(() => {
     if (!sectionRef.current || !videoRef.current) return;
 
-    const section = sectionRef.current;
-    const video = videoRef.current;
-    const lines = gsap.utils.toArray(".editorial-line");
-    // Entrance animation (start scroll)
-    lines.forEach((line: any) => {
-      gsap.fromTo(
-        line,
-        { transformOrigin: "top", opacity: 0 },
-        {
-          opacity: 1,
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 80%",
-            end: "bottom top ",
-            scrub: 1.2,
+    const ctx = gsap.context(() => {
+      const section = sectionRef.current!;
+      const video = videoRef.current!;
+      const lines = gsap.utils.toArray(".editorial-line");
+      // Entrance animation (start scroll)
+      lines.forEach((line: any) => {
+        gsap.fromTo(
+          line,
+          { transformOrigin: "top", opacity: 0 },
+          {
+            opacity: 1,
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: "top 80%",
+              end: "bottom top ",
+              scrub: 1.2,
+            },
+            duration: 2.5,
+            ease: "power3.out",
           },
-          duration: 2.5,
-          ease: "power3.out",
-        },
-      );
-    });
-
-    // Initial state
-    gsap.set(video, {
-      scale: 0.7,
-      filter: "blur(10px)",
-      borderRadius: "4rem",
-    });
-    // VIDEO SCALE ANIMATION - CLEAN VERSION
-    const videoTimeline = gsap.timeline({
-      scrollTrigger: {
-        trigger: section,
-        start: "top top",
-        end: "bottom top",
-        scrub: 0.6,
-      },
-    });
-
-    // Animate in (to peak)
-    videoTimeline.to(video, {
-      scale: 1.1,
-      filter: "blur(4px)",
-      borderRadius: "4rem",
-      ease: "power2.out",
-      duration: "1.2",
-      scrub: 0.9,
-    });
-
-    // Animate back (to original)
-    videoTimeline.to(video, {
-      scale: 0.7,
-      filter: "blur(10px)",
-      borderRadius: "4rem",
-      ease: "power2.inOut",
-    });
-
-    const handleMouseMove = (e: MouseEvent) => {
-      const { innerWidth, innerHeight } = window;
-      const x = (e.clientX / innerWidth - 0.5) * 40;
-      const y = (e.clientY / innerHeight - 0.5) * 40;
-
-      gsap.to(video, {
-        rotateY: x,
-        rotateX: -y,
-        force3D: true,
-        duration: 0.6,
-        ease: "power3.out",
+        );
       });
-    };
 
-    section.addEventListener("mousemove", handleMouseMove);
+      // Initial state
+      gsap.set(video, {
+        scale: 0.7,
+        "--manifesto-video-blur": "10px",
+        borderRadius: "4rem",
+      });
+      // VIDEO SCALE ANIMATION - CLEAN VERSION
+      const videoTimeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: "top top",
+          end: "bottom top",
+          scrub: 0.6,
+        },
+      });
 
-    return () => {
-      section.removeEventListener("mousemove", handleMouseMove);
-      ScrollTrigger.getAll().forEach((t) => t.kill());
-    };
+      // Animate in (to peak)
+      videoTimeline.to(video, {
+        scale: 1.1,
+        "--manifesto-video-blur": "4px",
+        borderRadius: "4rem",
+        ease: "power2.out",
+        duration: "1.2",
+        scrub: 0.9,
+      });
+
+      // Animate back (to original)
+      videoTimeline.to(video, {
+        scale: 0.7,
+        "--manifesto-video-blur": "10px",
+        borderRadius: "4rem",
+        ease: "power2.inOut",
+      });
+
+      const handleMouseMove = (e: MouseEvent) => {
+        const { innerWidth, innerHeight } = window;
+        const x = (e.clientX / innerWidth - 0.5) * 40;
+        const y = (e.clientY / innerHeight - 0.5) * 40;
+
+        gsap.to(video, {
+          rotateY: x,
+          rotateX: -y,
+          force3D: true,
+          duration: 0.6,
+          ease: "power3.out",
+        });
+      };
+
+      section.addEventListener("mousemove", handleMouseMove);
+
+      return () => {
+        section.removeEventListener("mousemove", handleMouseMove);
+      };
+    }, sectionRef);
+    return () => ctx.revert();
   }, []);
 
   useEffect(() => {
     if (!sectionRef.current || textRefs.current.some((ref) => ref === null))
       return;
 
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top top",
-          end: "+=700",
-          scrub: 0.4,
-          pin: true,
-          invalidateOnRefresh: true,
-        },
-      });
-
-      const splitTexts = textRefs.current.map((ref) => {
-        return new SplitText(ref!, {
-          type: "lines,words",
-          linesClass: "overflow-hidden",
+    const media = gsap.matchMedia();
+    media.add(
+      "(min-width: 1024px)",
+      () => {
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top top",
+            end: "+=700",
+            scrub: 0.4,
+            pin: true,
+            invalidateOnRefresh: true,
+          },
         });
-      });
 
-      gsap.set(".manifesto-title", { willChange: "transform, opacity" });
-      tl.from(".manifesto-title", { opacity: 0, y: 50, duration: 0.5 });
+        const splitTexts = textRefs.current.map((ref) => {
+          return new SplitText(ref!, {
+            type: "lines,words",
+            linesClass: "overflow-hidden",
+          });
+        });
 
-      // Initial paragraph
-      tl.from(
-        splitTexts[0].words,
-        { opacity: 0, y: 100, stagger: 0.01, duration: 0.5 },
-        "+=0.2",
-      );
+        gsap.set(".manifesto-title", { willChange: "transform, opacity" });
+        tl.from(".manifesto-title", { opacity: 0, y: 50, duration: 0.5 });
 
-      // REVISED - Imprints paragraph
-      tl.from(
-        splitTexts[1].words,
-        {
-          opacity: 0,
-          y: 20,
-          rotateX: -90,
-          transformOrigin: "top center",
-          stagger: 0.015,
-          duration: 0.5,
-          ease: "power2.out",
-        },
-        "+=0.2",
-      );
-      tl.from(
-        splitTexts[4]?.words || [],
-        {
-          opacity: 0,
-          scale: 1.2,
-          stagger: 0.02,
-          duration: 0.5,
-        },
-        "<0.1",
-      );
-      return () => {
-        splitTexts.forEach((split) => split.revert());
-        ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-      };
-    }, sectionRef);
+        // Initial paragraph
+        tl.from(
+          splitTexts[0].words,
+          { opacity: 0, y: 100, stagger: 0.01, duration: 0.5 },
+          "+=0.2",
+        );
 
-    return () => ctx.revert();
+        // REVISED - Imprints paragraph
+        tl.from(
+          splitTexts[1].words,
+          {
+            opacity: 0,
+            y: 20,
+            rotateX: -90,
+            transformOrigin: "top center",
+            stagger: 0.015,
+            duration: 0.5,
+            ease: "power2.out",
+          },
+          "+=0.2",
+        );
+        tl.from(
+          splitTexts[4]?.words || [],
+          {
+            opacity: 0,
+            scale: 1.2,
+            stagger: 0.02,
+            duration: 0.5,
+          },
+          "<0.1",
+        );
+        return () => {
+          splitTexts.forEach((split) => split.revert());
+        };
+      },
+      sectionRef,
+    );
+
+    return () => media.revert();
   }, []);
 
   return (
     <section
       ref={sectionRef}
       id="manifesto"
-      className="relative min-h-screen overflow-hidden pb-20"
+      className="relative min-h-screen overflow-hidden pb-12 lg:pb-20"
     >
-      <div className="absolute inset-0 -z-10 flex items-center justify-center">
+      <div className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center [clip-path:inset(0)]">
         <video
           ref={videoRef}
           src="/mannifestoo.mp4"
-          className="pointer-events-none fixed left-0 top-0 -z-10 h-full w-full rounded-[5rem] object-cover brightness-[200] invert transition-all dark:brightness-100 dark:invert-0"
+          className="pointer-events-none absolute inset-0 h-full w-full rounded-[5rem] object-cover [filter:blur(var(--manifesto-video-blur,0px))] max-lg:[filter:blur(var(--manifesto-video-blur,0px))_invert(1)] lg:fixed dark:max-lg:[filter:blur(var(--manifesto-video-blur,0px))]"
           muted
           autoPlay
           loop
@@ -191,21 +197,21 @@ export default function ManifestoSectionAlt() {
       </div>
 
       {/* Manifesto content */}
-      <div className="relative z-10 mx-auto max-w-screen-xl px-6 py-6 sm:px-8 lg:px-20">
+      <div className="relative z-10 mx-auto max-w-screen-xl px-5 py-6 manifesto-video-text sm:px-8 lg:px-20">
         {/* Title */}
-        <div className="manifesto-title mb-32">
+        <div className="manifesto-title mb-16 lg:mb-32">
           <motion.h2
             initial={{ y: 80, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ duration: 1.2, ease: "easeOut" }}
-            className="font-serif text-6xl leading-tight text-stone-900 dark:text-stone-100 md:text-7xl"
+            className="font-serif text-5xl leading-tight md:text-7xl"
           >
             Manifesto
           </motion.h2>
         </div>
 
         {/* Line 1 */}
-        <div className="mb-40 grid grid-cols-12">
+        <div className="mb-20 grid grid-cols-12 lg:mb-40">
           <div className="col-span-12 md:col-span-10 md:col-start-2">
             <motion.div
               ref={(el) => {
@@ -214,7 +220,7 @@ export default function ManifestoSectionAlt() {
               initial={{ y: 30, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               transition={{ duration: 1.2, ease: "easeOut" }}
-              className="font-serif text-3xl leading-snug text-stone-900 dark:text-stone-300 md:text-5xl"
+              className="font-serif text-3xl leading-snug md:text-5xl"
             >
               We're reimagining what calendars were meant to be —
               <br />
@@ -224,7 +230,7 @@ export default function ManifestoSectionAlt() {
         </div>
 
         {/* Line 2 (right-aligned) */}
-        <div className="mb-48 grid grid-cols-12">
+        <div className="mb-24 grid grid-cols-12 lg:mb-48">
           <div className="col-span-12 md:col-span-8 md:col-start-5">
             <motion.div
               ref={(el) => {
@@ -233,7 +239,7 @@ export default function ManifestoSectionAlt() {
               initial={{ y: 30, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               transition={{ duration: 1.2, ease: "easeOut" }}
-              className="text-xl leading-relaxed text-stone-900 dark:text-stone-300 md:text-2xl"
+              className="text-xl leading-relaxed md:text-2xl"
             >
               Time isn't just what passes or what gets done. It's what imprints.
               <br />
@@ -245,7 +251,7 @@ export default function ManifestoSectionAlt() {
         </div>
 
         {/* Final Statement (centered) */}
-        <div className="-mt-20 mb-4 flex justify-center">
+        <div className="mb-4 flex justify-center lg:-mt-20">
           <motion.div
             initial={{ y: 30, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
@@ -253,11 +259,11 @@ export default function ManifestoSectionAlt() {
             ref={(el) => {
               textRefs.current[4] = el;
             }}
-            className="max-w-2xl text-center font-serif text-2xl leading-normal text-stone-900 dark:text-stone-100"
+            className="max-w-2xl text-center font-serif text-2xl leading-normal"
           >
             Because productivity should be personal, rich, and full of color.
             <br />
-            <span className="mt-28 block font-sans text-xs uppercase tracking-[0.3em] text-stone-600 dark:text-stone-400">
+            <span className="mt-12 block font-sans text-xs uppercase tracking-[0.2em] lg:mt-28 lg:tracking-[0.3em]">
               Planning as expression. Productivity as art.
             </span>
           </motion.div>

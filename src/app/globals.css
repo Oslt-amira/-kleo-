@@ -145,7 +145,6 @@ html {
 /* Horizontal scroll container */
 .horizontal-sections-wrapper {
   display: flex;
-  width: "100%";
 }
 
 /* Hide scrollbar */
@@ -166,23 +165,36 @@ html {
 }
 
 /* Mobile adjustments */
-@media (max-width: 768px) {
-  .horizontal-container {
-    height: auto !important;
+@media (width < 1024px) {
+  #manifesto, #features, #integrations, #faq {
+    scroll-margin-top: 4rem;
   }
 
   .horizontal-sections-wrapper {
     flex-direction: column;
-    width: 100%;
   }
 
-  .horizontal-section {
-    min-width: 100%;
-    height: auto;
-    padding: 4rem 1rem;
+  .feature-media-item {
+    top: auto !important;
+    left: auto !important;
+  }
+
+  .floating-gallery img {
+    max-width: 22vw;
   }
 }
 
+@media (hover: none), (pointer: coarse) {
+  body, button, a, input, summary {
+    cursor: auto !important;
+  }
+}
+
+
+.manifesto-video-text {
+  color: white;
+  mix-blend-mode: difference;
+}
 
 .scroll-reveal {
   margin: 20px 0;

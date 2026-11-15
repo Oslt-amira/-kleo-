@@ -30,10 +30,10 @@ export default function MediaRotator() {
   }, []);
 
   return (
-    <section className="mx-2 inline-block rounded-lg border border-stone-600/60 px-2 py-0.5 text-center">
+    <span className="mx-2 inline-block rounded-lg border border-stone-600/60 px-2 py-0.5 text-center">
       <span ref={containerRef} className="mx-1 text-stone-600/60">
         {currentWord}
       </span>
-    </section>
+    </span>
   );
 }

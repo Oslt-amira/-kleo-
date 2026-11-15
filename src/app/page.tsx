@@ -154,21 +154,24 @@ export default function Home() {
     });
 
     // Horizontal scroll for the features section
-    const sections = gsap.utils.toArray(".horizontal-section");
+    const media = gsap.matchMedia();
+    media.add("(min-width: 1024px)", () => {
+      const sections = gsap.utils.toArray(".horizontal-section");
 
-    gsap.to(sections, {
-      xPercent: -100 * (sections.length - 1),
-      ease: "none",
-      scrollTrigger: {
-        trigger: ".horizontal-container",
-        pin: true,
-        scrub: 1,
-        snap: 1 / (sections.length - 1),
-        end: () =>
-          "+=" +
-          (document.querySelector(".horizontal-container") as HTMLElement)!
-            .offsetWidth,
-      },
+      gsap.to(sections, {
+        xPercent: -100 * (sections.length - 1),
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".horizontal-container",
+          pin: true,
+          scrub: 1,
+          snap: 1 / (sections.length - 1),
+          end: () =>
+            "+=" +
+            (document.querySelector(".horizontal-container") as HTMLElement)!
+              .offsetWidth,
+        },
+      });
     });
 
     // Parallax effect for background elements
@@ -185,13 +188,14 @@ export default function Home() {
         scrub: true,
       },
     });
+    return () => media.revert();
   }, []);
 
   return (
     <div>
       <div
         ref={cursorRef}
-        className="pointer-events-none fixed z-50 hidden h-4 w-4 rounded-full border border-white opacity-70 mix-blend-difference sm:block"
+        className="pointer-events-none fixed z-50 hidden h-4 w-4 rounded-full border border-white opacity-70 mix-blend-difference sm:block [@media(pointer:coarse)]:hidden"
         style={{
           left: `${mousePosition.x}px`,
           top: `${mousePosition.y}px`,
@@ -203,7 +207,7 @@ export default function Home() {
       <Hero />
 
       <AnimatedBlock />
-      <section id="manifesto">
+      <section>
         <ManifestoSectionAlt />
         <CanvasCursor />
       </section>
@@ -232,9 +236,9 @@ export default function Home() {
       {/* Features Section - Horizontal Scroll */}
       <section
         id="features"
-        className="horizontal-container relative mt-10 flex flex-row"
+        className="horizontal-container relative mt-10 flex flex-col lg:flex-row"
       >
-        <section className="min-w-screen flex h-full flex-col p-8">
+        <section className="flex h-full flex-col px-5 py-8 sm:p-8 lg:min-w-screen">
           <div className="max-w-xl">
             <h1 className="feature-title font-serif text-3xl">
               Kleo's collection of curated features
@@ -243,7 +247,7 @@ export default function Home() {
           </div>
         </section>
 
-        <div className="overflow-hidden" style={{ height: "100vh" }}>
+        <div className="overflow-hidden lg:h-screen">
           <div className="horizontal-sections-wrapper flex">
             <NumberedSection
               index={0}
