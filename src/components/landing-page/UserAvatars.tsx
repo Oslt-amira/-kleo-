@@ -28,7 +28,7 @@ export default function UserAvatars() {
         </Avatar>
       </div>
       <span className="text-sm text-stone-500/80 dark:text-stone-400/60">
-        ~ 50+ People already joined
+        ~ 130+ People already joined
       </span>
     </div>
   );
